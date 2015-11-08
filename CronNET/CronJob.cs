@@ -15,12 +15,20 @@ namespace CronNET
         private readonly ThreadStart _thread_start;
         private Thread _thread;
 
+		public string Schedule { get; private set; }
+
         public CronJob(string schedule, ThreadStart thread_start)
         {
             _cron_schedule = new CronSchedule(schedule);
+			this.Schedule = schedule;
             _thread_start = thread_start;
             _thread = new Thread(thread_start);
         }
+
+		public override string ToString ()
+		{
+			return string.Format ("[CronJob: Schedule={0}]", Schedule);
+		}
 
         private object _lock = new object();
         public void execute(DateTime date_time)

@@ -24,10 +24,11 @@ namespace CronNET
             timer.Elapsed += timer_elapsed;
         }
 
-        public void AddJob(string schedule, ThreadStart action)
+		public CronJob AddJob(string schedule, ThreadStart action)
         {
             var cj = new CronJob(schedule, action);
             cron_jobs.Add(cj);
+			return cj;
         }
 
         public void Start()
